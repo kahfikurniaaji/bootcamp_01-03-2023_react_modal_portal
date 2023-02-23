@@ -8,7 +8,10 @@ const Clock = () => {
 
   // Function useEffect untuk melakukan interval per 1 detik
   useEffect(() => {
-    setInterval(() => tick(), 1000);
+    const timerId = setInterval(() => tick(), 1000);
+    return function cleanup() {
+      clearInterval(timerId);
+    };
   });
 
   // Function tick untuk merubah state dengan new Date()
