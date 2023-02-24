@@ -1,22 +1,20 @@
 // Import the React libraries
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../pages";
-import About from "../pages/about";
-import Contact from "../pages/contact";
-import Navbar from "../navbar";
+import { useDispatch, useSelector } from "react-redux";
+
+import store from "../store/CounterReducer";
+import IncrementDecrement from "./IncrementDecrement";
 
 // Create a function for navigation
 const App = () => {
+  const counter = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/about" exact element={<About />} />
-        <Route path="/contact" exact element={<Contact />} />
-      </Routes>
-    </Router>
+    <div>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>INCREMENT</button>
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>DECREMENT</button>
+      <h1>{counter}</h1>
+    </div>
   );
 };
 
